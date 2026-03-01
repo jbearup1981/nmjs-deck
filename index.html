@@ -30,7 +30,7 @@ body { font-family: var(--body); color: var(--ch); -webkit-font-smoothing: antia
 .slide {
   width: 960px; height: 540px;
   position: absolute; top: 50%; left: 50%;
-  transform: translate(-50%, -50%) scale(calc(var(--scale, 1) * 0.97));
+  transform: translate(-50%, -50%) scale(var(--scale, 1));
   transform-origin: center center;
   overflow: hidden; opacity: 0; pointer-events: none;
   transition: opacity 0.7s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -1405,7 +1405,9 @@ document.addEventListener('touchend', function(e) {
 });
 // Scale
 function rescale() {
-  var s = Math.min(window.innerWidth / 960, window.innerHeight / 540) * 0.95;
+  const sw = window.innerWidth / 960;
+  const sh = window.innerHeight / 540;
+  var s = Math.min(sw, sh, 2) * 0.88;
   document.documentElement.style.setProperty('--scale', s);
 }
 window.addEventListener('resize', rescale);
